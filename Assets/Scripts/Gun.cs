@@ -1,5 +1,4 @@
-﻿using Cinemachine.Utility;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Gun : MonoBehaviour
@@ -96,7 +95,7 @@ public class Gun : MonoBehaviour
 
     private void UpdateEmpty()
     {
-        
+
     }
 
     private void UpdateReloading()
@@ -144,7 +143,7 @@ public class Gun : MonoBehaviour
             var target = hit.collider.GetComponent<IDamagable>();
             if (target != null)
             {
-                //target.OnDamage(gunData.damage, hitPosition, hitPosition.Normal);
+                target.OnDamage(gunData.damage, hit.point, hit.normal);
             }
         }
         else
@@ -155,6 +154,8 @@ public class Gun : MonoBehaviour
         StartCoroutine(CoShotEffect(hitPosition));
 
         --magAmmo;
+
+        Debug.Log($"{magAmmo}/{ammoRemain}");
         if (magAmmo == 0)
         {
             CurrentState = State.Empty;
@@ -163,6 +164,39 @@ public class Gun : MonoBehaviour
 
     public bool Reload()
     {
+        if (currentState == State.Reloading || ammoRemain == 0 || magAmmo == gunData.magCapacity)
+            return false;
+
+        
+        StartCoroutine(CoReload());
         return true;
+    }
+
+    private IEnumerator CoReload()
+    {
+        currentState = State.Reloading;
+        audioSource.PlayOneShot(gunData.reloadClip);
+
+        yield return new WaitForSeconds(gunData.reloadTime);
+
+        magAmmo += ammoRemain;
+        if (magAmmo > gunData.magCapacity)
+        {
+            magAmmo = gunData.magCapacity;
+            ammoRemain -= magAmmo;
+        }
+        else
+        {
+            ammoRemain = 0;
+        }
+
+        currentState = State.Ready;
+        Debug.Log($"{magAmmo}/{ammoRemain} << 재장전");
+
+        //int amount = gunData.magCapacity - magAmmo;
+        //int fillAmount = Mathf.Min(amount, ammoRemain);
+
+        //magAmmo += fillAmount;
+        //ammoRemain -= fillAmount;
     }
 }
