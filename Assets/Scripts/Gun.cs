@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
+    public GunData gunData;
+
     public ParticleSystem muzzelEffect;
     public ParticleSystem shellEffect;
     public Transform firePos;
