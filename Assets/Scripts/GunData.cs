@@ -13,4 +13,6 @@ public class GunData : ScriptableObject
 
     public float timeBetFire = 0.12f;
     public float reloadTime = 1.8f;
+
+    public float fireDistance = 50f;
 }
