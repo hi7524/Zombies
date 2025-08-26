@@ -32,9 +32,10 @@ public class LivingEntity : MonoBehaviour, IDamagable
         IsDead = true;
         OnDeath?.Invoke();
 
-        //if (OnDeath != null)
-        //{
-        //    OnDeath();
-        //}
+        // 아래와 같은 동작
+        // if (OnDeath != null)
+        // {
+        //     OnDeath();
+        // }
     }
 }

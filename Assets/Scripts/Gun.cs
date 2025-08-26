@@ -70,7 +70,6 @@ public class Gun : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Space))
         {
-            //StartCoroutine(CoShotEffect());
             Fire();
         }
 

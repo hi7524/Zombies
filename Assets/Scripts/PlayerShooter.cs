@@ -6,6 +6,12 @@ public class PlayerShooter : MonoBehaviour
 
     public Gun gun;
 
+    private Vector3 gunInitPos;
+    private Quaternion gunInitRot;
+
+    private Rigidbody gunRb;
+    private Collider gunCollider;
+
     public Transform gunPivot;
     public Transform leftHandMount;
     public Transform rightHandMount;
@@ -18,6 +24,30 @@ public class PlayerShooter : MonoBehaviour
     {
         input = GetComponent<PlayerInput>();
         animator = GetComponent<Animator>();
+
+        gunRb = gun.GetComponent<Rigidbody>();
+        gunCollider = gun.GetComponent<Collider>();
+
+        gunInitPos = gun.transform.localPosition;
+        gunInitRot = gun.transform.localRotation;
+    }
+
+    private void OnEnable()
+    {
+        gunRb.isKinematic = true;
+        gunCollider.enabled = false;
+        gun.transform.localPosition = gunInitPos;
+        gun.transform.localRotation = gunInitRot;
+    }
+
+    private void OnDisable()
+    {
+        // 초기값으로 돌리기위해 
+        gunRb.linearVelocity = Vector3.zero;
+        gunRb.angularVelocity = Vector3.zero;
+
+        gunRb.isKinematic = false;
+        gunCollider.enabled = true;
     }
 
     private void Update()
