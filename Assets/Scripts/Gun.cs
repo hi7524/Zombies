@@ -112,7 +112,7 @@ public class Gun : MonoBehaviour
         lineRenderer.SetPosition(0, firePos.position); // (인덱스, 위치)
         lineRenderer.SetPosition(1, hitPosition);
 
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.01f);
 
         lineRenderer.enabled = false;
     }
@@ -197,5 +197,11 @@ public class Gun : MonoBehaviour
 
         //magAmmo += fillAmount;
         //ammoRemain -= fillAmount;
+    }
+
+    public void AddAmmo(int amount)
+    {
+        Debug.Log("AddAmmo()");
+        ammoRemain = Mathf.Min(ammoRemain + amount, gunData.startAmmoRemain);
     }
 }
