@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class Zombie : LivingEntity
@@ -54,7 +55,7 @@ public class Zombie : LivingEntity
     private NavMeshAgent agent;
     private Animator animator;
 
-    public Transform target;
+    private Transform target;
 
 
     private void Awake()
@@ -77,7 +78,7 @@ public class Zombie : LivingEntity
                 break;
 
             case Status.Trace:
-                UpdateTrace();
+                UpdateTrace();  
                 break;
 
             case Status.Attack:
@@ -97,6 +98,8 @@ public class Zombie : LivingEntity
         {
             CurrentStatus = Status.Trace;
         }
+
+        target = FindTarget(traceDistance);
     }
 
     private void UpdateTrace()
@@ -106,7 +109,7 @@ public class Zombie : LivingEntity
             CurrentStatus = Status.Attack;
             return;
         }
-        if (target == null && Vector3.Distance(transform.position, target.position) > traceDistance)
+        if (target == null || Vector3.Distance(transform.position, target.position) > traceDistance)
         {
             CurrentStatus = Status.Idle;
             return;
@@ -154,5 +157,19 @@ public class Zombie : LivingEntity
         base.Die();
 
         CurrentStatus = Status.Die;
+    }
+
+    public LayerMask targetLayer;
+
+    protected Transform FindTarget(float radius)
+    {
+        var colliders = Physics.OverlapSphere(transform.position, radius, targetLayer.value);
+
+        if (colliders.Length == 0)
+            return null;
+
+        // 거리 오름차순 정렬 후 가장 첫 번째 요소 반환
+        var target = colliders.OrderBy(x => Vector3.Distance(x.transform.position, transform.position)).First();
+        return target.transform;
     }
 }

@@ -1051,6 +1051,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7116147654436192693, guid: aa42576c6e7ac044ab995f1e33dc2d15,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 8356162420464418867, guid: aa42576c6e7ac044ab995f1e33dc2d15,
         type: 3}
       propertyPath: m_TargetGraphic
@@ -1177,36 +1182,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1281906102957714654, guid: 2284c05d40d82f84da7ebd54b20c529b,
-        type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 611744755}
-    - target: {fileID: 1281906102957714654, guid: 2284c05d40d82f84da7ebd54b20c529b,
-        type: 3}
-      propertyPath: traceDistance
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1281906102957714654, guid: 2284c05d40d82f84da7ebd54b20c529b,
-        type: 3}
-      propertyPath: attackDistance
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4755861350225546820, guid: 2284c05d40d82f84da7ebd54b20c529b,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4755861350225546820, guid: 2284c05d40d82f84da7ebd54b20c529b,
-        type: 3}
-      propertyPath: m_Radius
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 4755861350225546820, guid: 2284c05d40d82f84da7ebd54b20c529b,
-        type: 3}
-      propertyPath: m_AngularSpeed
-      value: 500
-      objectReference: {fileID: 0}
     - target: {fileID: 7535788137200684666, guid: 2284c05d40d82f84da7ebd54b20c529b,
         type: 3}
       propertyPath: m_LocalPosition.x
