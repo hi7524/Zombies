@@ -45,6 +45,8 @@ public class Gun : MonoBehaviour
     public int ammoRemain; // 남은 총알
     public int magAmmo;    // 탄창 크기
 
+    public UIManager uiManager;
+
     private float lastFireTime;
 
 
@@ -62,6 +64,7 @@ public class Gun : MonoBehaviour
         ammoRemain = gunData.startAmmoRemain;
         magAmmo = gunData.magCapacity;
         lastFireTime = 0f;
+        uiManager.SetAmmoTxt(magAmmo, ammoRemain);
 
         CurrentState = State.Ready;
     }
@@ -153,8 +156,8 @@ public class Gun : MonoBehaviour
         StartCoroutine(CoShotEffect(hitPosition));
 
         --magAmmo;
+        uiManager.SetAmmoTxt(magAmmo, ammoRemain);
 
-        Debug.Log($"{magAmmo}/{ammoRemain}");
         if (magAmmo == 0)
         {
             CurrentState = State.Empty;
@@ -190,7 +193,8 @@ public class Gun : MonoBehaviour
         }
 
         currentState = State.Ready;
-        Debug.Log($"{magAmmo}/{ammoRemain} << 재장전");
+
+        uiManager.SetAmmoTxt(magAmmo, ammoRemain);
 
         //int amount = gunData.magCapacity - magAmmo;
         //int fillAmount = Mathf.Min(amount, ammoRemain);
@@ -201,7 +205,7 @@ public class Gun : MonoBehaviour
 
     public void AddAmmo(int amount)
     {
-        Debug.Log("AddAmmo()");
         ammoRemain = Mathf.Min(ammoRemain + amount, gunData.startAmmoRemain);
+        uiManager.SetAmmoTxt(magAmmo, ammoRemain);
     }
 }
