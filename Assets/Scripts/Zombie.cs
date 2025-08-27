@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Animations;
+using UnityEngine.Audio;
 
 public class Zombie : LivingEntity
 {
@@ -54,19 +57,30 @@ public class Zombie : LivingEntity
 
     private NavMeshAgent agent;
     private Animator animator;
+    private CapsuleCollider capsuleCollider;
+    private AudioSource audioSource;
 
     private Transform target;
+    public LayerMask targetLayer;
 
+    public ParticleSystem bloodEffect;
+
+    public AudioClip zombieDamage;
+    public AudioClip zombieDie;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+        capsuleCollider.enabled = true;
+        CurrentStatus = Status.Idle;
     }
 
     private void Update()
@@ -150,16 +164,26 @@ public class Zombie : LivingEntity
     public override void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
     {
         base.OnDamage(damage, hitPoint, hitNormal);
+        BloodEffect(hitPoint, hitNormal);
+        audioSource.PlayOneShot(zombieDamage);
+    }
+
+    private void BloodEffect(Vector3 hitPos, Vector3 hitNormal)
+    {
+        bloodEffect.transform.position = hitPos;
+        bloodEffect.transform.forward = hitNormal;
+        //bloodEffect.transform.rotation = Quaternion.LookRotation(hitNormal);
+        bloodEffect.Play();
     }
 
     protected override void Die()
     {
         base.Die();
 
+        audioSource.PlayOneShot(zombieDie);
+        capsuleCollider.enabled = false;
         CurrentStatus = Status.Die;
     }
-
-    public LayerMask targetLayer;
 
     protected Transform FindTarget(float radius)
     {
