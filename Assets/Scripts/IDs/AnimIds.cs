@@ -6,4 +6,6 @@ public static class AnimIds
     public static readonly int MoveHash = Animator.StringToHash("Move");
     public static readonly int ReloadHash = Animator.StringToHash("Reload");
     public static readonly int DieHash = Animator.StringToHash("Die");
+
+    public static readonly int HasTarget = Animator.StringToHash("HasTarget");
 }
