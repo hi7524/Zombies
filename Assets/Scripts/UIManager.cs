@@ -17,7 +17,7 @@ public class UIManager : MonoBehaviour
 
     public void SetScoreTxt(int score)
     {
-        scoreTxt.text = $"SCORE: {score}";
+        scoreTxt.text = $"SCORE: {score:N0}";
     }
 
     public void SetEnemyWaveTxt(int wave, int leftEnemy)

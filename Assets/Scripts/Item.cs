@@ -19,7 +19,8 @@ public class Item : MonoBehaviour, IItem
         {
             case Types.Coin:
                 {
-                    Debug.Log("Coin");
+                    var playerData = go.GetComponent<PlayerData>();
+                    playerData?.AddCoin(value);
                 }
                 break;
 
