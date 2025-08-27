@@ -2,8 +2,6 @@
 
 public class PlayerShooter : MonoBehaviour
 {
-    public static readonly int IdReload = Animator.StringToHash("Reload");
-
     public Gun gun;
 
     private Vector3 gunInitPos;
@@ -60,7 +58,7 @@ public class PlayerShooter : MonoBehaviour
         {
             if (gun.Reload())
             {
-                animator.SetTrigger(IdReload);
+                animator.SetTrigger(AnimIds.ReloadHash);
             }
         }
     }

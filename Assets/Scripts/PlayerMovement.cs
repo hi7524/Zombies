@@ -7,8 +7,6 @@
 
 public class PlayerMovement : MonoBehaviour
 {
-    private static readonly int MoveHash = Animator.StringToHash("Move");
-
     public float moveSpeed = 5f;
     public float rotationSpeed = 180f;
 
@@ -33,6 +31,6 @@ public class PlayerMovement : MonoBehaviour
         rb.MovePosition(rb.position + transform.forward * playerInput.Move * moveSpeed * Time.fixedDeltaTime);
 
         
-        animator.SetFloat(MoveHash, playerInput.Move);
+        animator.SetFloat(AnimIds.MoveHash, playerInput.Move);
     }
 }

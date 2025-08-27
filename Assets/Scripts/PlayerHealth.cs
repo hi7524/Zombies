@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerHealth : LivingEntity
@@ -15,8 +14,6 @@ public class PlayerHealth : LivingEntity
 
     private PlayerMovement movement;
     private PlayerShooter shooter;
-
-    private static readonly int DieHash = Animator.StringToHash("Die");
 
 
     private void Awake()
@@ -67,7 +64,7 @@ public class PlayerHealth : LivingEntity
         base.Die();
 
         healthSlider.gameObject.SetActive(false);
-        animator.SetTrigger(DieHash);
+        animator.SetTrigger(AnimIds.DieHash);
         audioSource.PlayOneShot(deathClip);
 
         movement.enabled = false;
