@@ -19,8 +19,9 @@ public class Item : MonoBehaviour, IItem
         {
             case Types.Coin:
                 {
-                    var playerData = go.GetComponent<PlayerData>();
-                    playerData?.AddCoin(value);
+                    var gameMgrObj = GameObject.FindGameObjectWithTag(TagManager.GameController);
+                    var gameMgr = gameMgrObj.GetComponent<GameManager>();
+                    gameMgr.AddScore(value);
                 }
                 break;
 

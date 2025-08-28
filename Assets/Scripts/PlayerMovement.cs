@@ -77,18 +77,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void Lotate()
     {
-        Vector3 mouseScreenPos = Input.mousePosition;
-        mouseScreenPos.z = cam.WorldToScreenPoint(transform.position).z;
+        //Vector3 mouseScreenPos = Input.mousePosition;
+        //mouseScreenPos.z = cam.WorldToScreenPoint(transform.position).z;
 
-        Vector3 mouseWorldPos = cam.ScreenToWorldPoint(mouseScreenPos);
+        //Vector3 mouseWorldPos = cam.ScreenToWorldPoint(mouseScreenPos);
 
-        Vector3 lookDirection = mouseWorldPos - transform.position;
-        lookDirection.y = 0f;
+        //Vector3 lookDirection = mouseWorldPos - transform.position;
+        //lookDirection.y = 0f;
 
-        if (lookDirection != Vector3.zero)
+        //if (lookDirection != Vector3.zero)
+        //{
+        //    Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+        //    transform.rotation = targetRotation;
+        //}
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
         {
-            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-            transform.rotation = targetRotation;
+            Vector3 targetPos = hit.point;
+            targetPos.y = transform.position.y;
+
+            transform.LookAt(targetPos);
         }
     }
 }

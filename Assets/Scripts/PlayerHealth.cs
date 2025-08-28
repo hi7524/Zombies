@@ -15,8 +15,6 @@ public class PlayerHealth : LivingEntity
     private PlayerMovement movement;
     private PlayerShooter shooter;
 
-    public UIManager uiManager;
-
 
     private void Awake()
     {
@@ -71,6 +69,5 @@ public class PlayerHealth : LivingEntity
 
         movement.enabled = false;
         shooter.enabled = false;
-        uiManager.SetActiveGameOverUI(true);
     }
 }
