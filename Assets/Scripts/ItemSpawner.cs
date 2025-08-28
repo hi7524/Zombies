@@ -1,16 +1,18 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SocialPlatforms.GameCenter;
+using UnityEngine.Experimental.GlobalIllumination;
 
 public class ItemSpawner : MonoBehaviour
 {
+    // O | 아이템 생성 위치 시각화 (인스펙터에서 범위 조정 가능하도록)
+    // X | 아이템 스폰 확률
+    // X | 아이템 생성시 이미 주변에 아이템이 존재한다면 스폰 위치 재탐색
+
     public GameObject[] itemPrfs;
     public float spawnInterval = 1.5f;
+    public Vector3 spawnArea = new Vector3(5f, 0.001f, 3f);
+
     private float spawnItemTime = 0f;
-
-    //
-    // NavMesh.SamplePosition 넘긴 좌표의 가장 가까운 점 찾았는지 여부 반환
-
     private float findRange = 5f;
 
     private void Update()
@@ -45,14 +47,15 @@ public class ItemSpawner : MonoBehaviour
     {
         for (int i = 0; i < 30; i++)
         {
-            float randomX = Random.Range(-9, 9);
-            float randomZ = Random.Range(-9, 9);
+            float randomX = Random.Range(-spawnArea.x, spawnArea.z);
+            float randomZ = Random.Range(-spawnArea.z, spawnArea.z);
 
             Vector3 randomPoint = new Vector3(randomX, 1.0f, randomZ);
             NavMeshHit hit;
 
             // 기준 위치, NavMeshHit, 검출할 최대 거리, NavMesh 영역 마스크)
-            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+            if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas) &&
+                ContainPos(randomPoint, spawnArea))
             {
                 result = hit.position;
                 return true;
@@ -62,5 +65,23 @@ public class ItemSpawner : MonoBehaviour
 
         result = Vector3.zero;
         return false;
+    }
+
+    private bool ContainPos(Vector3 point, Vector3 areaSize)
+    {
+        float hx = areaSize.x * 0.5f;
+        float hz = areaSize.z * 0.5f;
+        return (point.x >= -hx && point.x <= hx) &&
+               (point.z >= -hz && point.z <= hz);
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+
+        var center = transform.position;
+        var sz = new Vector3(spawnArea.x, spawnArea.y, spawnArea.z);
+
+        Gizmos.DrawWireCube(center, sz);
     }
 }

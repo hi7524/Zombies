@@ -155,6 +155,7 @@ MonoBehaviour:
   - {fileID: 8236917285841411889, guid: 6b02facc7da0af8438e7237fd9a2d11e, type: 3}
   - {fileID: 4831773712767699911, guid: 9b4b16d90e1fa494a9bb24d8f4b01295, type: 3}
   spawnInterval: 1.5
+  spawnArea: {x: 20, y: 0.001, z: 20}
 --- !u!4 &231668181
 Transform:
   m_ObjectHideFlags: 0
@@ -164,7 +165,7 @@ Transform:
   m_GameObject: {fileID: 231668179}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1092,6 +1093,10 @@ PrefabInstance:
     - target: {fileID: 1738932568335938, guid: 5314e1f0757cf4cf79d58731d117e6cd, type: 3}
       propertyPath: m_Name
       value: ZombieSpawner
+      objectReference: {fileID: 0}
+    - target: {fileID: 1738932568335938, guid: 5314e1f0757cf4cf79d58731d117e6cd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4701262881481600, guid: 5314e1f0757cf4cf79d58731d117e6cd, type: 3}
       propertyPath: m_LocalPosition.x
