@@ -373,3 +373,10 @@ MonoBehaviour:
   bloodEffect: {fileID: 6340143026012015069}
   zombieDamage: {fileID: 8300000, guid: c3d8accfc053f004ca665a1c8c4a6919, type: 3}
   zombieDie: {fileID: 8300000, guid: b86f03005ed394911b43027aeaaedeb7, type: 3}
+  zombieRenderer: {fileID: 7535788137203900218}
+--- !u!137 &7535788137203900218 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 13700000, guid: 6bc76eedb6629574a83870562bc0c4ee,
+    type: 3}
+  m_PrefabInstance: {fileID: 7535788137200817306}
+  m_PrefabAsset: {fileID: 0}

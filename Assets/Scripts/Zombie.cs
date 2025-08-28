@@ -68,6 +68,9 @@ public class Zombie : LivingEntity
     public AudioClip zombieDamage;
     public AudioClip zombieDie;
 
+    public Renderer zombieRenderer;
+
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -79,8 +82,17 @@ public class Zombie : LivingEntity
     protected override void OnEnable()
     {
         base.OnEnable();
+
         capsuleCollider.enabled = true;
         CurrentStatus = Status.Idle;
+    }
+
+    public void Setup(ZombieData data)
+    {
+        MaxHealth = data.maxHp;
+        damage = data.damage;
+        agent.speed = data.speed;
+        zombieRenderer.material.color = data.skinColor; // 좋지 못한 방법 
     }
 
     private void Update()

@@ -155,18 +155,21 @@ public class Gun : MonoBehaviour
 
         StartCoroutine(CoShotEffect(hitPosition));
 
-        --magAmmo;
-        uiManager.SetAmmoTxt(magAmmo, ammoRemain);
-
-        if (magAmmo == 0)
+        if (magAmmo <= 0)
         {
             CurrentState = State.Empty;
         }
+        else
+        {
+            --magAmmo;
+            uiManager.SetAmmoTxt(magAmmo, ammoRemain);
+        }
+
     }
 
     public bool Reload()
     {
-        if (currentState == State.Reloading || ammoRemain == 0 || magAmmo == gunData.magCapacity)
+        if (currentState == State.Reloading || ammoRemain <= 0 || magAmmo == gunData.magCapacity)
             return false;
 
         

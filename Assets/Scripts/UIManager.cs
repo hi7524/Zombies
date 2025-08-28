@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     public void OnEnable()
     {
         SetScoreTxt(0);
-        SetEnemyWaveTxt(0, 0);
+        SetEnemyWaveTxt(0, 0);  
         SetActiveGameOverUI(false);
     }
 
