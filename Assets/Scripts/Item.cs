@@ -55,3 +55,6 @@ public class Item : MonoBehaviour, IItem
         }
     }
 }
+
+// NavMesh.SamplePosition(0);
+// 
