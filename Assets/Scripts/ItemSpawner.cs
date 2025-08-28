@@ -1,30 +1,34 @@
 ﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Experimental.GlobalIllumination;
 
 public class ItemSpawner : MonoBehaviour
 {
     // O | 아이템 생성 위치 시각화 (인스펙터에서 범위 조정 가능하도록)
-    // X | 아이템 스폰 확률
+    // O | 아이템 스폰 확률
     // X | 아이템 생성시 이미 주변에 아이템이 존재한다면 스폰 위치 재탐색
 
     public GameObject[] itemPrfs;
-    public float spawnInterval = 1.5f;
+    public float trySpawnInterval = 3f;
     public Vector3 spawnArea = new Vector3(5f, 0.001f, 3f);
+    [Range(0, 100)]
+    public int spawnProbability;
 
     private float spawnItemTime = 0f;
     private float findRange = 5f;
 
     private void Update()
     {
-        if (Time.time >= spawnItemTime +  spawnInterval)
+        if (Time.time >= spawnItemTime +  trySpawnInterval)
         {
             spawnItemTime = Time.time;
-            TEST();
+
+            int random = Random.Range(0, 100 + 1);
+            if (random < spawnProbability)
+                TrySpawnItem();
         }
     }
 
-    private void TEST()
+    private void TrySpawnItem()
     {
         Vector3 randomPos = Vector3.zero;
 
@@ -60,7 +64,6 @@ public class ItemSpawner : MonoBehaviour
                 result = hit.position;
                 return true;
             }
-
         }
 
         result = Vector3.zero;
