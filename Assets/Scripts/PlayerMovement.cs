@@ -62,6 +62,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 inputDir = new Vector3(playerInput.MoveH, 0, playerInput.MoveV);
         Vector3 moveDir = camForward * inputDir.z + camRight * inputDir.x;
 
+        if (moveDir.sqrMagnitude > 0f)
+            moveDir.Normalize();
+
         rb.MovePosition(rb.position + moveDir * moveSpeed * Time.fixedDeltaTime);
 
         float normalizedSpeed = Mathf.Clamp(rb.linearVelocity.magnitude / moveSpeed, 0f, 1f);

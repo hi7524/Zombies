@@ -3,16 +3,23 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public Text scoreTxt;
-    public Text enemyWaveTxt;
     public Text ammoText;
+    public Text scoreTxt;
+    public Text waveTxt;
 
     public GameObject gameOverUi;
 
 
-    public void Awake()
+    public void OnEnable()
     {
-        gameOverUi.SetActive(false);
+        SetScoreTxt(0);
+        SetEnemyWaveTxt(0, 0);
+        SetActiveGameOverUI(false);
+    }
+
+    public void SetAmmoTxt(int ammo, int remainAmmo)
+    {
+        ammoText.text = $"{ammo} / {remainAmmo}";
     }
 
     public void SetScoreTxt(int score)
@@ -22,17 +29,17 @@ public class UIManager : MonoBehaviour
 
     public void SetEnemyWaveTxt(int wave, int leftEnemy)
     {
-        enemyWaveTxt.text = $"Wave: {wave}\n" +
-                            $"Enemy Left: {leftEnemy}";
+        waveTxt.text = $"Wave: {wave}\n" +
+                       $"Enemy Left: {leftEnemy}";
     }
 
-    public void SetAmmoTxt(int ammo, int remainAmmo)
+    public void SetActiveGameOverUI(bool active)
     {
-        ammoText.text = $"{ammo} / {remainAmmo}";
+        gameOverUi.SetActive(active);
     }
 
-    public void ActiveGameOverUI()
+    public void OnClickRestart()
     {
-        gameOverUi.SetActive(true);
+        // 게임 재시작
     }
 }

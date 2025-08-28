@@ -917,9 +917,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e6b1449dd3c032469850e027d57d65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreTxt: {fileID: 1577859735}
-  enemyWaveTxt: {fileID: 680355082}
   ammoText: {fileID: 951029526}
+  scoreTxt: {fileID: 1577859735}
+  waveTxt: {fileID: 680355082}
   gameOverUi: {fileID: 903677386}
 --- !u!1 &1552006634
 GameObject:

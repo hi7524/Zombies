@@ -71,6 +71,6 @@ public class PlayerHealth : LivingEntity
 
         movement.enabled = false;
         shooter.enabled = false;
-        uiManager.ActiveGameOverUI();
+        uiManager.SetActiveGameOverUI(true);
     }
 }
